@@ -1,0 +1,84 @@
+//##MylinkedList;
+
+class Node{
+	Object ele;
+	Node next;
+	Node(Object e,Node n)
+	{
+		ele=e;
+		next=n;
+	}
+}
+public class MyLinkedList {
+	private Node frist=null;
+	private int p;
+  public void add(Object e) {
+       if(frist==null) {
+	   frist=new Node(e,null);
+	   p++;
+      }
+   Node temp=frist;
+   while(temp!=null) {
+	   temp=temp.next;
+     }
+   temp.next=new Node(e,null);
+   p++;  
+}
+  public int size() {
+	  return p;
+  }
+public Object get(int index) {
+	if(index<0||index>size()) {
+		throw new IndexOutOfBoundsException();
+	}
+	Node temp=frist;
+	for(int i=1;i<=index;i++) {
+		temp=temp.next;
+	}
+	return temp.ele;
+}
+public Node clear() {
+	p=0;
+	return new Node(null,null);
+}
+public void remove(int index) {
+	if(index<0||index>size()) {
+		throw new IndexOutOfBoundsException();
+	}
+	if(index==1) {
+		frist=frist.next;
+		p--;
+	}
+	Node temp=frist;
+	for(int i=1;i<index;i++) {
+		temp=temp.next;
+	}
+	temp.next=temp.next.next;
+	p--;
+}
+public void add(int index,Object e) {
+	if(index<0||index>size()) {
+		throw new IndexOutOfBoundsException();
+	}
+	if(index==1) {
+		frist=new Node(e,frist);
+	}
+	Node temp=frist;
+	for(int i=1;i<=index;i++) {
+		temp=temp.next;
+	}
+	temp=new Node(e,temp.next);
+}
+public String totring() {
+	if(frist==null) return"[]";
+	String str=" ";
+	str+="["+frist.ele;
+	Node temp=frist;
+	for(int i=1;i<=size();i++)
+	{
+		temp=temp.next;
+		str+=temp;
+	}
+	return str+="]";
+}
+}
